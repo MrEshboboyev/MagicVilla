@@ -2,6 +2,7 @@
 using MagicVilla_API.Models;
 using MagicVilla_API.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MagicVilla_API.Controllers
 {
@@ -20,7 +21,17 @@ namespace MagicVilla_API.Controllers
         [HttpGet("{id:int}")] // https://localhost:7009/api/VillaAPI/1
         public ActionResult<VillaDTO> GetVilla(int id)
         {
-            return Ok(VillaStore.villaList.FirstOrDefault(x => x.Id == id));
+            if(id == 0)
+            {
+                return BadRequest();
+            }
+            var villa = VillaStore.villaList.FirstOrDefault(x => x.Id == id);
+            if(villa == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(villa);
         }
     }
 }
