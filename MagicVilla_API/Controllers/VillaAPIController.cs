@@ -8,6 +8,7 @@ namespace MagicVilla_API.Controllers
 {
     //[Route("api/[controller]")]
     [Route("api/VillaAPI")]
+    //[ApiController] // validation not following without [ApiController] attribute
     [ApiController]
     public class VillaAPIController : ControllerBase
     {
@@ -46,7 +47,11 @@ namespace MagicVilla_API.Controllers
         [HttpPost]
         public ActionResult<VillaDTO> CreateVilla([FromBody] VillaDTO villaDTO)
         {
-            if(villaDTO == null)
+            //if(!ModelState.IsValid) // validation following only this method without [ApiController]
+            //{
+            //    return BadRequest();
+            //}
+            if (villaDTO == null)
             {
                 return BadRequest();
             }
