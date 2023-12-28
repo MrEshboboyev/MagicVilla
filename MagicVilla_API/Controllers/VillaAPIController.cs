@@ -16,7 +16,8 @@ namespace MagicVilla_API.Controllers
             return VillaStore.villaList;
         }
 
-        [HttpGet("id")]
+        //[HttpGet("id")] // https://localhost:7009/api/VillaAPI/id?id=1
+        [HttpGet("{id:int}")] // https://localhost:7009/api/VillaAPI/1
         public VillaDTO GetVilla(int id)
         {
             return VillaStore.villaList.FirstOrDefault(x => x.Id == id);
